@@ -1,3 +1,24 @@
 <resources>
-    <string name="app_name">Kotlin Material Design 03</string>
+    <string name="app_name">Kotlin Material Design 3.0</string>
+    <string name="error_server_msg">Server Error</string>
+    <string name="error_msg">Error</string>
+    <string name="reload_msg">Reload</string>
+    <string name="error_empty_url_msg">Empty URL</string>
+    <string name="error_request_msg">Request Error</string>
+    <string name="pod_description">Picture of The Day</string>
+    <string name="earth_description">Earth Photos</string>
+    <string name="mars_description">Mars Rover Photos</string>
+    <string name="settings_action_text">Settings</string>
+    <string name="settings_theme_type_title">Choice Theme</string>
+    <string name="settings_type_purple">Purple</string>
+    <string name="settings_type_teal">Teal</string>
+    <string name="settings_button_apply">Apply</string>
+    <string name="pod_today">Today</string>
+    <string name="pod_yesterday">Yesterday</string>
+    <string name="pod_day_before_yesterday">Day before yesterday</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="dim">Width and height in degrees</string>
+    <string name="earth_apply_action">Apply</string>
+    <string name="mars_date_title">Earth date</string>
 </resources>
