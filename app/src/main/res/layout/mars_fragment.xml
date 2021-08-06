@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mars_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".view.mars.MarsFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/mars_nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="20dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/mars_info_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@id/mars_image_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/PromptTextView"
+                        android:layout_marginBottom="20dp"
+                        android:text="@string/mars_date_title" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/mars_date_text_view"
+                        style="@style/PromptTextView"
+                        android:layout_marginBottom="20dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:textColor="?attr/colorOnSecondary" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <dyachenko.kotlinmaterialdesign03.util.EquilateralImageView
+                android:id="@+id/mars_image_view"
+                style="@style/EquilateralImageView"
+                android:contentDescription="@string/mars_description"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_no_photo_vector" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:id="@+id/mars_loading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_anchor="@+id/mars_nested_scroll_view"
+        app:layout_anchorGravity="center"
+        tools:visibility="visible">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="?attr/colorPrimary" />
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
