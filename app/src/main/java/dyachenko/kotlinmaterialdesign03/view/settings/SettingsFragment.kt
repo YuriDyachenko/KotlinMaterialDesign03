@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.RadioButton
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
 import dyachenko.kotlinmaterialdesign03.R
 import dyachenko.kotlinmaterialdesign03.databinding.SettingsFragmentBinding
@@ -32,18 +33,43 @@ class SettingsFragment : Fragment() {
     private fun initViews() = with(binding) {
         (radioGroup.getChildAt(SettingsData.currentTheme) as RadioButton).isChecked = true
 
-        applyButton.setOnClickListener {
-            val oldValue = SettingsData.currentTheme
-            SettingsData.currentTheme = when (radioGroup.checkedRadioButtonId) {
-                R.id.radio_button_teal -> SettingsData.THEME_TEAL
-                else -> SettingsData.THEME_PURPLE
+        settingMotionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
+            override fun onTransitionStarted(
+                motionLayout: MotionLayout?,
+                startId: Int,
+                endId: Int
+            ) {
             }
-            activity?.supportFragmentManager?.popBackStack()
-            if (SettingsData.currentTheme != oldValue) {
-                writeSettings()
-                activity?.recreate()
+
+            override fun onTransitionChange(
+                motionLayout: MotionLayout?,
+                startId: Int,
+                endId: Int,
+                progress: Float
+            ) {
             }
-        }
+
+            override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+                val oldValue = SettingsData.currentTheme
+                SettingsData.currentTheme = when (radioGroup.checkedRadioButtonId) {
+                    R.id.settings_radio_button_teal -> SettingsData.THEME_TEAL
+                    else -> SettingsData.THEME_PURPLE
+                }
+                activity?.supportFragmentManager?.popBackStack()
+                if (SettingsData.currentTheme != oldValue) {
+                    writeSettings()
+                    activity?.recreate()
+                }
+            }
+
+            override fun onTransitionTrigger(
+                motionLayout: MotionLayout?,
+                triggerId: Int,
+                positive: Boolean,
+                progress: Float
+            ) {
+            }
+        })
     }
 
     private fun writeSettings() {

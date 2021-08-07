@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+    <Transition
+        motion:constraintSetEnd="@+id/set_end"
+        motion:constraintSetStart="@+id/set_start"
+        motion:duration="1000">
+        <OnClick motion:targetId="@+id/settings_apply_chip" />
+    </Transition>
+    <ConstraintSet id="@+id/set_start">
+        <Constraint
+            android:id="@+id/settings_linear_layout_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+    </ConstraintSet>
+    <ConstraintSet id="@+id/set_end">
+        <Constraint
+            android:id="@+id/settings_linear_layout_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+    </ConstraintSet>
+</MotionScene>

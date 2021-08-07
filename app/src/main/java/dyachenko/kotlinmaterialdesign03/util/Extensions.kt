@@ -47,7 +47,7 @@ fun View.showSnackBar(
 
 fun FragmentManager.addFragmentWithBackStack(fragment: Fragment) = this.apply {
     beginTransaction()
-        .add(R.id.container, fragment)
+        .add(R.id.main_container, fragment)
         .addToBackStack(null)
         .commit()
 }
