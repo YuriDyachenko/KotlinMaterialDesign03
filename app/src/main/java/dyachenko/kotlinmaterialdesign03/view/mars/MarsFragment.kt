@@ -11,6 +11,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import dyachenko.kotlinmaterialdesign03.R
 import dyachenko.kotlinmaterialdesign03.databinding.MarsFragmentBinding
+import dyachenko.kotlinmaterialdesign03.model.mars.MarsPhotosResponseData
 import dyachenko.kotlinmaterialdesign03.util.*
 import dyachenko.kotlinmaterialdesign03.viewmodel.AppState
 import dyachenko.kotlinmaterialdesign03.viewmodel.mars.MarsViewModel
@@ -50,8 +51,8 @@ class MarsFragment : Fragment() {
 
     private fun renderData(data: AppState) = with(binding) {
         when (data) {
-            is AppState.SuccessMars -> {
-                val responseData = data.responseData
+            is AppState.Success<*> -> {
+                val responseData = data.responseData as MarsPhotosResponseData
                 if (responseData.photos.isEmpty()) {
                     if (daysBefore < MAX_DAYS_BEFORE) {
                         daysBefore++
@@ -92,10 +93,6 @@ class MarsFragment : Fragment() {
                 marsRootView.showSnackBar(data.error.message ?: getString(R.string.error_msg),
                     getString(R.string.reload_msg),
                     { getData() })
-            }
-            is AppState.SuccessEarth -> {
-            }
-            is AppState.SuccessPOD -> {
             }
         }
     }
