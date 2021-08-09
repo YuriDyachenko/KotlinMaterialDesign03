@@ -10,8 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
 import dyachenko.kotlinmaterialdesign03.R
 import dyachenko.kotlinmaterialdesign03.databinding.PodBottomSheetLayoutBinding
 import dyachenko.kotlinmaterialdesign03.databinding.PodFragmentBinding
@@ -93,25 +91,14 @@ class PODFragment : Fragment() {
         when (data) {
             is AppState.Success<*> -> {
                 val responseData = data.responseData as PODResponseData
-                val url = responseData.url
 
                 if (responseData.mediaType == "image") {
-                    Picasso
-                        .get()
-                        .load(url)
-                        .placeholder(R.drawable.ic_no_photo_vector)
-                        .into(podImageView, object : Callback {
-                            override fun onSuccess() {
-                                podLoadingLayout.hide()
-                            }
-
-                            override fun onError(e: Exception?) {
-                                podRootView.showSnackBar(e?.message
-                                    ?: getString(R.string.error_server_msg),
-                                    getString(R.string.reload_msg),
-                                    { getData() })
-                            }
-                        })
+                    loadImageWithCallback(
+                        responseData.url,
+                        podImageView,
+                        podLoadingLayout,
+                        podRootView
+                    ) { getData() }
 
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
                 } else {
@@ -129,10 +116,11 @@ class PODFragment : Fragment() {
                 podLoadingLayout.show()
             }
             is AppState.Error -> {
-                podLoadingLayout.hide()
-                podRootView.showSnackBar(data.error.message ?: getString(R.string.error_msg),
-                    getString(R.string.reload_msg),
-                    { getData() })
+                whenError(
+                    data.error.message,
+                    podLoadingLayout,
+                    podRootView
+                ) { getData() }
             }
         }
     }
