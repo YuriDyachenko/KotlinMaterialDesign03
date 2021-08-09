@@ -6,6 +6,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import dyachenko.kotlinmaterialdesign03.R
 import java.text.SimpleDateFormat
 import java.util.*
@@ -47,7 +49,7 @@ fun View.showSnackBar(
 
 fun FragmentManager.addFragmentWithBackStack(fragment: Fragment) = this.apply {
     beginTransaction()
-        .add(R.id.container, fragment)
+        .add(R.id.main_container, fragment)
         .addToBackStack(null)
         .commit()
 }
@@ -63,3 +65,44 @@ fun Menu.hideAllItems() {
 }
 
 fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
+
+fun Fragment.loadImageWithCallback(
+    url: String?,
+    imageView: EquilateralImageView,
+    loadingLayout: View,
+    rootView: View,
+    actionReload: (View) -> Unit
+) {
+    Picasso
+        .get()
+        .load(url)
+        .placeholder(R.drawable.ic_no_photo_vector)
+        .into(imageView, object : Callback {
+            override fun onSuccess() {
+                loadingLayout.hide()
+            }
+
+            override fun onError(e: Exception?) {
+                rootView.showSnackBar(
+                    e?.message
+                        ?: getString(R.string.error_server_msg),
+                    getString(R.string.reload_msg),
+                    actionReload
+                )
+            }
+        })
+}
+
+fun Fragment.whenError(
+    errorMessage: String?,
+    loadingLayout: View,
+    rootView: View,
+    actionReload: (View) -> Unit
+) {
+    loadingLayout.hide()
+    rootView.showSnackBar(
+        errorMessage ?: getString(R.string.error_msg),
+        getString(R.string.reload_msg),
+        actionReload
+    )
+}

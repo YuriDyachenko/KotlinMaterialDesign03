@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
+import dyachenko.kotlinmaterialdesign03.view.about.AboutFragment
 import dyachenko.kotlinmaterialdesign03.R
 import dyachenko.kotlinmaterialdesign03.model.settings.SettingsData
 import dyachenko.kotlinmaterialdesign03.util.addFragmentWithBackStack
@@ -76,6 +77,10 @@ class MainActivity : AppCompatActivity() {
         when (id) {
             R.id.settings_action -> {
                 supportFragmentManager.addFragmentWithBackStack(SettingsFragment())
+                return true
+            }
+            R.id.about_action -> {
+                supportFragmentManager.addFragmentWithBackStack(AboutFragment())
                 return true
             }
         }

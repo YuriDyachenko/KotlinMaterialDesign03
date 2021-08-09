@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
-import dyachenko.kotlinmaterialdesign03.R
 import dyachenko.kotlinmaterialdesign03.databinding.EarthFragmentBinding
+import dyachenko.kotlinmaterialdesign03.model.earth.EarthResponseData
 import dyachenko.kotlinmaterialdesign03.model.settings.SettingsData
 import dyachenko.kotlinmaterialdesign03.util.*
 import dyachenko.kotlinmaterialdesign03.viewmodel.AppState
@@ -91,39 +89,23 @@ class EarthFragment : Fragment() {
 
     private fun renderData(data: AppState) = with(binding) {
         when (data) {
-            is AppState.SuccessEarth -> {
-                val responseData = data.responseData
-                val url = responseData.url
-
-                Picasso
-                    .get()
-                    .load(url)
-                    .placeholder(R.drawable.ic_no_photo_vector)
-                    .into(earthImageView, object : Callback {
-                        override fun onSuccess() {
-                            earthLoadingLayout.hide()
-                        }
-
-                        override fun onError(e: Exception?) {
-                            earthRootView.showSnackBar(e?.message
-                                ?: getString(R.string.error_server_msg),
-                                getString(R.string.reload_msg),
-                                { getData() })
-                        }
-                    })
+            is AppState.Success<*> -> {
+                loadImageWithCallback(
+                    (data.responseData as EarthResponseData).url,
+                    earthImageView,
+                    earthLoadingLayout,
+                    earthRootView
+                ) { getData() }
             }
             is AppState.Loading -> {
                 earthLoadingLayout.show()
             }
             is AppState.Error -> {
-                earthLoadingLayout.hide()
-                earthRootView.showSnackBar(data.error.message ?: getString(R.string.error_msg),
-                    getString(R.string.reload_msg),
-                    { getData() })
-            }
-            is AppState.SuccessPOD -> {
-            }
-            is AppState.SuccessMars -> {
+                whenError(
+                    data.error.message,
+                    earthLoadingLayout,
+                    earthRootView
+                ) { getData() }
             }
         }
     }

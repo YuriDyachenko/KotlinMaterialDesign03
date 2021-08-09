@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
 import dyachenko.kotlinmaterialdesign03.R
 import dyachenko.kotlinmaterialdesign03.databinding.MarsFragmentBinding
+import dyachenko.kotlinmaterialdesign03.model.mars.MarsPhotosResponseData
 import dyachenko.kotlinmaterialdesign03.util.*
 import dyachenko.kotlinmaterialdesign03.viewmodel.AppState
 import dyachenko.kotlinmaterialdesign03.viewmodel.mars.MarsViewModel
@@ -50,8 +49,8 @@ class MarsFragment : Fragment() {
 
     private fun renderData(data: AppState) = with(binding) {
         when (data) {
-            is AppState.SuccessMars -> {
-                val responseData = data.responseData
+            is AppState.Success<*> -> {
+                val responseData = data.responseData as MarsPhotosResponseData
                 if (responseData.photos.isEmpty()) {
                     if (daysBefore < MAX_DAYS_BEFORE) {
                         daysBefore++
@@ -65,37 +64,23 @@ class MarsFragment : Fragment() {
                     val url = responseData.photos.first().url
                     val earthDate = responseData.photos.first().earth_date
                     marsDateTextView.text = earthDate
-
-                    Picasso
-                        .get()
-                        .load(url)
-                        .placeholder(R.drawable.ic_no_photo_vector)
-                        .into(marsImageView, object : Callback {
-                            override fun onSuccess() {
-                                marsLoadingLayout.hide()
-                            }
-
-                            override fun onError(e: Exception?) {
-                                marsRootView.showSnackBar(e?.message
-                                    ?: getString(R.string.error_server_msg),
-                                    getString(R.string.reload_msg),
-                                    { getData() })
-                            }
-                        })
+                    loadImageWithCallback(
+                        url,
+                        marsImageView,
+                        marsLoadingLayout,
+                        marsRootView
+                    ) { getData() }
                 }
             }
             is AppState.Loading -> {
                 marsLoadingLayout.show()
             }
             is AppState.Error -> {
-                marsLoadingLayout.hide()
-                marsRootView.showSnackBar(data.error.message ?: getString(R.string.error_msg),
-                    getString(R.string.reload_msg),
-                    { getData() })
-            }
-            is AppState.SuccessEarth -> {
-            }
-            is AppState.SuccessPOD -> {
+                whenError(
+                    data.error.message,
+                    marsLoadingLayout,
+                    marsRootView
+                ) { getData() }
             }
         }
     }

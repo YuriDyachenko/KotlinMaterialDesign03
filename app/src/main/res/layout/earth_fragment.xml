@@ -20,71 +20,65 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/earth_input_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@id/earth_image_view"
-                app:layout_constraintEnd_toEndOf="parent"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/earth_lat_text_view"
+                style="@style/PromptTextView"
+                android:labelFor="@id/earth_lat_edit_text"
+                android:text="@string/latitude"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="@id/earth_lat_edit_text" />
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/earth_lon_text_view"
+                style="@style/PromptTextView"
+                android:labelFor="@id/earth_lon_edit_text"
+                android:text="@string/longitude"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/earth_lon_edit_text" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/PromptTextView"
-                        android:labelFor="@id/earth_lat_edit_text"
-                        android:text="@string/latitude" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/earth_dim_text_view"
+                style="@style/PromptTextView"
+                android:labelFor="@id/earth_dim_edit_text"
+                android:text="@string/dim"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/earth_dim_edit_text" />
 
-                    <EditText
-                        android:id="@+id/earth_lat_edit_text"
-                        style="@style/EditTextViewDecimal"
-                        android:autofillHints="@string/latitude" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/earth_end_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="end"
+                app:constraint_referenced_ids="earth_lat_text_view, earth_lon_text_view, earth_dim_text_view" />
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+            <EditText
+                android:id="@+id/earth_lat_edit_text"
+                style="@style/EditTextViewDecimal"
+                android:autofillHints="@string/latitude"
+                app:layout_constraintStart_toEndOf="@id/earth_end_barrier"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/PromptTextView"
-                        android:labelFor="@id/earth_lon_edit_text"
-                        android:text="@string/longitude" />
+            <EditText
+                android:id="@+id/earth_lon_edit_text"
+                style="@style/EditTextViewDecimal"
+                android:autofillHints="@string/longitude"
+                app:layout_constraintStart_toEndOf="@id/earth_end_barrier"
+                app:layout_constraintTop_toBottomOf="@id/earth_lat_edit_text" />
 
-                    <EditText
-                        android:id="@+id/earth_lon_edit_text"
-                        style="@style/EditTextViewDecimal"
-                        android:autofillHints="@string/longitude" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
+            <EditText
+                android:id="@+id/earth_dim_edit_text"
+                style="@style/EditTextViewDecimal"
+                android:autofillHints="@string/dim"
+                app:layout_constraintStart_toEndOf="@id/earth_end_barrier"
+                app:layout_constraintTop_toBottomOf="@id/earth_lon_edit_text" />
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/PromptTextView"
-                        android:labelFor="@id/earth_dim_edit_text"
-                        android:text="@string/dim" />
-
-                    <EditText
-                        android:id="@+id/earth_dim_edit_text"
-                        style="@style/EditTextViewDecimal"
-                        android:autofillHints="@string/dim" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/earth_apply_chip"
-                        style="@style/ChipAction"
-                        android:layout_gravity="end"
-                        android:text="@string/earth_apply_action" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/earth_apply_chip"
+                style="@style/ChipAction"
+                android:layout_gravity="end"
+                android:text="@string/earth_apply_action"
+                app:layout_constraintStart_toEndOf="@id/earth_dim_edit_text"
+                app:layout_constraintTop_toTopOf="@+id/earth_dim_edit_text" />
 
             <dyachenko.kotlinmaterialdesign03.util.EquilateralImageView
                 android:id="@+id/earth_image_view"
@@ -93,7 +87,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/earth_input_layout"
+                app:layout_constraintTop_toBottomOf="@id/earth_apply_chip"
                 app:srcCompat="@drawable/ic_no_photo_vector" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
