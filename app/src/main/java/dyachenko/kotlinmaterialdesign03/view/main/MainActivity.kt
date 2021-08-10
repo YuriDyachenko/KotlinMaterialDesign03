@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.viewpager.widget.ViewPager
 import dyachenko.kotlinmaterialdesign03.view.about.AboutFragment
 import dyachenko.kotlinmaterialdesign03.R
@@ -36,6 +37,12 @@ class MainActivity : AppCompatActivity() {
 
         val indicator = findViewById<CircleIndicator>(R.id.main_indicator)
         indicator.setViewPager(viewPager)
+
+        val container = findViewById<ConstraintLayout>(R.id.main_container)
+        container
+            .animate()
+            .alpha(1F)
+            .duration = 1000
     }
 
     private fun readSettings() {
