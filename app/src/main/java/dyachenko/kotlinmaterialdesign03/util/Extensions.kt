@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -49,6 +50,7 @@ fun View.showSnackBar(
 
 fun FragmentManager.addFragmentWithBackStack(fragment: Fragment) = this.apply {
     beginTransaction()
+        .setCustomAnimations(R.animator.slide_in_left, R.animator.slide_in_right)
         .add(R.id.main_container, fragment)
         .addToBackStack(null)
         .commit()

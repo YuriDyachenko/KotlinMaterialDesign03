@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kotlin Material Design 4.0</string>
+    <string name="app_name">Kotlin Material Design 5.0</string>
     <string name="error_server_msg">Server Error</string>
     <string name="error_msg">Error</string>
     <string name="reload_msg">Reload</string>
