@@ -3,9 +3,14 @@ package dyachenko.kotlinmaterialdesign03.util
 import android.text.Editable
 import android.view.Menu
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import androidx.transition.ChangeBounds
+import androidx.transition.ChangeImageTransform
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -107,4 +112,29 @@ fun Fragment.whenError(
         getString(R.string.reload_msg),
         actionReload
     )
+}
+
+fun EquilateralImageView.imageTransform(
+    isExpanded: Boolean,
+    rootView: ViewGroup
+) {
+    TransitionManager.beginDelayedTransition(
+        rootView, TransitionSet()
+            .addTransition(ChangeBounds())
+            .addTransition(ChangeImageTransform())
+    )
+    val params: ViewGroup.LayoutParams = this.layoutParams
+    params.height =
+        if (isExpanded) {
+            ViewGroup.LayoutParams.MATCH_PARENT
+        } else {
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        }
+    this.layoutParams = params
+    this.scaleType =
+        if (isExpanded) {
+            ImageView.ScaleType.CENTER_CROP
+        } else {
+            ImageView.ScaleType.FIT_CENTER
+        }
 }

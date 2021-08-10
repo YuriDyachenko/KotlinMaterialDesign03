@@ -25,6 +25,8 @@ class MarsFragment : Fragment() {
 
     private var daysBefore = START_DAYS_BEFORE
 
+    private var isImageExpanded = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,11 +38,20 @@ class MarsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initImageExpansion()
+
         val observer = Observer<AppState> { renderData(it) }
         viewModel.setStringResources { id: Int -> getString(id) }
         viewModel.getLiveData().observe(viewLifecycleOwner, observer)
 
         getData()
+    }
+
+    private fun initImageExpansion() = with(binding) {
+        marsImageView.setOnClickListener {
+            isImageExpanded = isImageExpanded.not()
+            marsImageView.imageTransform(isImageExpanded, marsRootView)
+        }
     }
 
     private fun getData() {
