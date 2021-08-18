@@ -5,12 +5,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.viewpager.widget.ViewPager
-import dyachenko.kotlinmaterialdesign03.view.about.AboutFragment
 import dyachenko.kotlinmaterialdesign03.R
 import dyachenko.kotlinmaterialdesign03.model.settings.SettingsData
 import dyachenko.kotlinmaterialdesign03.util.addFragmentWithBackStack
+import dyachenko.kotlinmaterialdesign03.view.about.AboutFragment
+import dyachenko.kotlinmaterialdesign03.view.notes.NotesFragment
 import dyachenko.kotlinmaterialdesign03.view.settings.SettingsFragment
 import me.relex.circleindicator.CircleIndicator
 
@@ -37,12 +37,6 @@ class MainActivity : AppCompatActivity() {
 
         val indicator = findViewById<CircleIndicator>(R.id.main_indicator)
         indicator.setViewPager(viewPager)
-
-        val container = findViewById<ConstraintLayout>(R.id.main_container)
-        container
-            .animate()
-            .alpha(1F)
-            .duration = 1000
     }
 
     private fun readSettings() {
@@ -82,6 +76,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun doAction(id: Int): Boolean {
         when (id) {
+            R.id.notes_action -> {
+                supportFragmentManager.addFragmentWithBackStack(NotesFragment())
+                return true
+            }
             R.id.settings_action -> {
                 supportFragmentManager.addFragmentWithBackStack(SettingsFragment())
                 return true

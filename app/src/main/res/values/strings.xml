@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kotlin Material Design 5.0</string>
+    <string name="app_name">Kotlin Material Design 6.0</string>
     <string name="error_server_msg">Server Error</string>
     <string name="error_msg">Error</string>
     <string name="reload_msg">Reload</string>
@@ -46,4 +46,8 @@
         "the public. To ensure future success for the agency and the nation, NASA also supports "
         "education efforts in STEM with an emphasis on increasing diversity in our future workforce.\n\n"
     </string>
+    <string name="notes_action_text">Notes</string>
+    <string name="notes_add_action_text">Add Note</string>
+    <string name="notes_edit_action_text">Edit Note</string>
+    <string name="notes_delete_action_text">Delete Note</string>
 </resources>

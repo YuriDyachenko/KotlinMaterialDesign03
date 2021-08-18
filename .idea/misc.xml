@@ -10,12 +10,16 @@
         <entry key="..\:/KotlinProjects/KotlinMaterialDesign03/app/src/main/res/layout/activity_main.xml" value="0.30052083333333335" />
         <entry key="..\:/KotlinProjects/KotlinMaterialDesign03/app/src/main/res/layout/earth_fragment.xml" value="0.2942708333333333" />
         <entry key="..\:/KotlinProjects/KotlinMaterialDesign03/app/src/main/res/layout/mars_fragment.xml" value="0.2942708333333333" />
+        <entry key="..\:/KotlinProjects/KotlinMaterialDesign03/app/src/main/res/layout/notes_fragment.xml" value="0.28177083333333336" />
+        <entry key="..\:/KotlinProjects/KotlinMaterialDesign03/app/src/main/res/layout/notes_item.xml" value="0.321875" />
+        <entry key="..\:/KotlinProjects/KotlinMaterialDesign03/app/src/main/res/layout/notes_item_current.xml" value="0.31875" />
         <entry key="..\:/KotlinProjects/KotlinMaterialDesign03/app/src/main/res/layout/pod_bottom_sheet_layout.xml" value="0.2942708333333333" />
         <entry key="..\:/KotlinProjects/KotlinMaterialDesign03/app/src/main/res/layout/pod_fragment.xml" value="0.2942708333333333" />
         <entry key="..\:/KotlinProjects/KotlinMaterialDesign03/app/src/main/res/layout/settings_fragment.xml" value="0.25" />
         <entry key="..\:/KotlinProjects/KotlinMaterialDesign03/app/src/main/res/layout/settings_fragment_end.xml" value="0.296875" />
         <entry key="..\:/KotlinProjects/KotlinMaterialDesign03/app/src/main/res/layout/settings_motion_scene.xml" value="0.296875" />
         <entry key="..\:/KotlinProjects/KotlinMaterialDesign03/app/src/main/res/menu/menu_main.xml" value="0.3338541666666667" />
+        <entry key="..\:/KotlinProjects/KotlinMaterialDesign03/app/src/main/res/menu/menu_notes.xml" value="0.31875" />
         <entry key="..\:/KotlinProjects/KotlinMaterialDesign03/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.28717948717948716" />
         <entry key="..\:/KotlinProjects/KotlinMaterialDesign03/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.28717948717948716" />
       </map>

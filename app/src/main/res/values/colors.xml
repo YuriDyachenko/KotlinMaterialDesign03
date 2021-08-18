@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#66000000</color>
+    <color name="light_gray">#f6f6fa</color>
+    <color name="blue">#A4DEF8</color>
     <color name="bottom_sheet_background">#f6f6fa</color>
     <color name="color_accent">#D81B60</color>
 </resources>
